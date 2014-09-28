@@ -30,6 +30,9 @@
 <body <?php body_class(); ?>>
 
 <header id="site_header">
+
+<?php PO_Theme::menu('header'); ?>
+
 </header>
 
-<section id="page">
+<section id="page" class="container">
