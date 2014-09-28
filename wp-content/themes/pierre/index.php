@@ -15,5 +15,6 @@ global $wp_query;
 </main>
 
 <?php
+get_sidebar();
 get_footer();
 ?>

@@ -24,6 +24,10 @@ p{
 	color: #fff
 }
 
+img {
+	max-width: 100%;
+}
+
 section[class^="loop-"]{
 	
 }

@@ -14,6 +14,7 @@ class PO_Theme
 
 		add_action( 'wp_enqueue_scripts', array($this, 'enque_styles') );
 		add_action( 'init',  array($this, 'register_menus') );
+		add_action( 'widgets_init', array($this, 'register_widget_areas') );
 	}
 
 	public function font_url(){
@@ -33,6 +34,25 @@ class PO_Theme
 
 		register_nav_menus($menus);
 	} //register_menus
+
+	public function register_widget_areas(){
+		
+		$areas = array(
+					array(
+						'name'          => 'Header Left',
+						'id'            => 'header-left',
+						'before_widget' => '<aside itemscope id="%1$s" class="widget %2$s">',
+						'after_widget'  => '</aside>',
+						'before_title'  => '<h3 class="widget-title">',
+						'after_title'   => '</h3>'
+					)
+				);
+
+		foreach($areas as $area){
+			register_sidebar($area);			
+		}
+
+	}//register_widget_areas
 
 	public static function loop($query, $args=array()){
 		$defaults = array('content' => 'content');
@@ -67,7 +87,7 @@ class PO_Theme
 			'container'       => 'nav'
 		);		
 		wp_nav_menu( $menu );		
-	}
+	}//menu
 }
 
 $theme = new PO_Theme();

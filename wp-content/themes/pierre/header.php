@@ -29,11 +29,18 @@
 
 <body <?php body_class(); ?>>
 
-<header id="site_header" class="row">
+<header id="site_header" class="container">
+	<section class="row">
+		<div class="col-sm-8"><?php PO_Theme::menu('header'); ?></div>
 
-	<div class="col-sm-9"><?php PO_Theme::menu('header'); ?></div>
+		<div class="col-sm-4 text-right"><?php WP_Geek::logo(); ?></div>
+	</section>
 
-	<div class="col-sm-3 text-right"><?php WP_Geek::logo(); ?></div>
+	<section id="header_widgets" class="row">
+		<div class="col-sm-4">Progress Bar</div>
+		<div class="col-sm-4">Appearances</div>
+		<div class="col-sm-4">Subscribe</div>
+	</section>
 
 </header>
 
