@@ -29,9 +29,11 @@
 
 <body <?php body_class(); ?>>
 
-<header id="site_header">
+<header id="site_header" class="row">
 
-<?php PO_Theme::menu('header'); ?>
+	<div class="col-sm-9"><?php PO_Theme::menu('header'); ?></div>
+
+	<div class="col-sm-3 text-right"><?php WP_Geek::logo(); ?></div>
 
 </header>
 
