@@ -4,4 +4,6 @@ jQuery(document).ready(function($){
 		$(this).parent().html('');
 	});//$('.wpg_delete').click
 
+	$('.wpg_field.datepicker').datepicker({ dateFormat: date_format });
+
 });//doc ready

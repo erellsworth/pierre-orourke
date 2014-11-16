@@ -1,0 +1,71 @@
+.note_to_gibbs_rss_post{
+width:90%;
+margin:5px auto 25px auto;
+padding:10px 0;
+}
+
+.note_to_gibbs_rss_post .gibbs_note{
+	background:#FCF0AD;
+	padding:0 15px 5px 15px;
+-moz-box-shadow: 5px 5px 7px rgba(33,33,33,1);
+-webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+
+  -webkit-transform:rotate(-1deg);  
+  -o-transform:rotate(-1deg);  
+  -moz-transform:rotate(-1deg);  
+  
+-moz-transition: -moz-transform .15s linear;
+-o-transition: -o-transform .15s linear;
+-webkit-transition: -webkit-transform .15s linear;		
+}
+
+.note_to_gibbs_rss_post p,
+.note_to_gibbs_rss_post h3{
+font-family: 'Architects Daughter', cursive;
+color:#000;
+}
+
+.note_to_gibbs_rss_post .gibbs_note p{
+font-size:21px;
+word-wrap: break-word;
+}
+
+.note_to_gibbs_rss_post .gibbs_note h3{
+	font-size:24px;
+	font-weight:bold;
+}
+
+
+.note_to_gibbs_rss_post:nth-child(even) .gibbs_note{  
+  -o-transform:rotate(1deg);  
+  -webkit-transform:rotate(1deg);  
+  -moz-transform:rotate(1deg);  
+  position:relative;  
+  top:5px;  
+}  
+.note_to_gibbs_rss_post:nth-child(3n) .gibbs_note{  
+  -o-transform:rotate(-2deg);  
+  -webkit-transform:rotate(-2deg);  
+  -moz-transform:rotate(-2deg);  
+  position:relative;  
+  top:-5px;  
+}  
+.note_to_gibbs_rss_posti:nth-child(5n) .gibbs_note{  
+  -o-transform:rotate(-2deg);  
+  -webkit-transform:rotate(-2deg);  
+  -moz-transform:rotate(-2deg);  
+  position:relative;  
+  top:-10px;  
+}  
+
+.note_to_gibbs_rss_post .gibbs_note:hover{
+	  -moz-box-shadow:10px 10px 7px rgba(0,0,0,.7);  
+  -webkit-box-shadow: 10px 10px 7px rgba(0,0,0,.7);  
+  box-shadow:10px 10px 7px rgba(0,0,0,.7);  
+  -webkit-transform: scale(1.1);  
+  -moz-transform: scale(1.1);  
+  -o-transform: scale(1.1);  
+  position:relative;  
+  z-index:5;  
+}

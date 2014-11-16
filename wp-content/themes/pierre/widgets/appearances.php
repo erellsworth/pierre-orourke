@@ -2,32 +2,22 @@
 /**
  * Images widget class
  */
-class wp_Geek_Widget_Recent_Posts extends WP_Widget {
+class po_Appearances_Widget extends WP_Widget {
 	
 	public $fields = array(
 		'title',
 		'subhead',
-		'readmore',
-		'size',
-		'thumb',
-		'custom_text',
-		'number',
-		'link',
-		'customlink',
-		'maxwidth',
-		'link_title',
-		'post_type'
+		'number'
 	);
 	
-    function wp_Geek_Widget_Recent_Posts(){
-        $widget_ops = array('classname' => 'wp_Geek_recent_post', 'description' => __( "Show Recent Post(s)", 'wp_Geek_Recent_Post_widget') );
-        $this->WP_Widget('wpg-recent-post-widget', __('WordPress Geek Recent Post', 'wp_Geek_Recent_Post_widget'), $widget_ops);
-    }//wp_Geek_Widget_Recent_Posts
+    function po_Appearances_Widget(){
+        $widget_ops = array('classname' => 'po_Appearances', 'description' => __( "Show list of Appearances", 'po_Appearances_widget') );
+        $this->WP_Widget('po-appearances-widget', __('Appearances', 'po_Appearances_widget'), $widget_ops);
+    }//po_Appearances_Widget
 	
 	/*--------------------------Front End Display------------------------------------------------------*/
     function widget($args, $instance) {
-		wp_enqueue_style('wpg_styles');
-		wp_enqueue_script('wpg_scripts');
+
         extract($args);
 		
 		foreach($this->fields as $key){ $this->$key = $instance[$key]; }//foreach
@@ -46,8 +36,11 @@ class wp_Geek_Widget_Recent_Posts extends WP_Widget {
 		if($this->subhead){ ?><h4><?php echo $this->subhead; ?></h4><?php }
 
 		$queryargs = array(
-			'post_type' => $instance['post_type'],
-			'posts_per_page' => $instance['number']
+			'post_type' => 'appearances',
+			'posts_per_page' => $instance['number'],
+			'meta_key' => 'date',
+			'orderby' => 'meta_value_num',
+			'order' => 'ASC'		
 		); 
 		 
 		$query = new WP_Query($queryargs);		
@@ -55,14 +48,18 @@ class wp_Geek_Widget_Recent_Posts extends WP_Widget {
             global $post;
                   while ( $query->have_posts() ) {
                     $query->the_post();
-					$before_post_title = apply_filters('wpg_before_recent_post_title', '<a href="' . get_permalink() . '">');
-					$after_post_title =  apply_filters('wpg_before_recent_post_title', '</a>');
+
+                    $meta = new WP_Geek_metabox();
+                    $meta->setdata();
+
+					$before_post_title = apply_filters('wpg_before_appearances_title', '<a href="' . get_permalink() . '">');
+					$after_post_title =  apply_filters('wpg_before_appearances_title', '</a>');
 					 ?>
                     
                     <div class="excerpt">
-                    <h4 class="recent_post_title"><?php echo $before_post_title; the_title(); echo $after_post_title; ?></h4>
-                    <p class="recent_post_date">Posted <?php the_date(); ?></p>
-	                    <?php the_excerpt(); ?>
+                    <h4 class="appearances_title"><?php echo $before_post_title; the_title(); echo $after_post_title; ?></h4>
+                    <p class="appearances_date"><?php echo $meta->time . ', ' . $meta->date; ?></p>
+	                    
 
                     <div class="clear"></div>
                                         
@@ -108,8 +105,6 @@ class wp_Geek_Widget_Recent_Posts extends WP_Widget {
     }
 	/*--------------------------Admin Form------------------------------------------------------*/
 	function form( $instance ) {
-		wp_enqueue_media();
-		wp_enqueue_script('wpg_widget_admin');
 		
 		$title = array(
 			'name' => $this->get_field_name('title'),
@@ -127,25 +122,6 @@ class wp_Geek_Widget_Recent_Posts extends WP_Widget {
 			'id' => $this->get_field_id('subhead'),
 			'value' => $instance['subhead'],
 			'class' => 'widefat'
-		);
-		
-		if(!$instance['post_type']){ $instance['post_type'] = 'post';}
-		
-		$post_type = array(
-			'name' => $this->get_field_name('post_type'),
-			'label' => 'Post Type: ',
-			'id' => $this->get_field_id('post_type'),
-			'value' => $instance['post_type'],
-			'class' => 'widefat'
-		);		
-
-		$custom_text = array(
-			'type' => 'textarea',
-			'name' => $this->get_field_name('custom_text'),
-			'label' => 'Custom Excerpt: ',
-			'id' => $this->get_field_id('custom_text'),
-			'value' => $instance['custom_text'],
-			'class' => 'widefat'
 		);		
 
 		$number = array(
@@ -156,75 +132,8 @@ class wp_Geek_Widget_Recent_Posts extends WP_Widget {
 			'value' => $instance['number'],
 			'class' => 'widefat'
 		);		
-		
-		$link = array(
-			'type' => 'content_selector',
-			'name' => $this->get_field_name('link'),
-			'label' => 'Link: ',
-			'id' => $this->get_field_id('link'),
-			'value' => $instance['link'],
-			'class' => 'widefat'
-		);								
-	
-		$customlink = array(
-			'name' => $this->get_field_name('customlink'),
-			'label' => 'Custom Link: ',
-			'placeholder' => 'Custom Link',
-			'id' => $this->get_field_id('customlink'),
-			'value' => $instance['customlink'],
-			'class' => 'widefat'
-		);
 
-
-		$link_title = array(
-			'type' => 'checkbox',
-			'name' => $this->get_field_name('link_title'),
-			'label' => 'Link Title: ',
-			'id' => $this->get_field_id('link_title'),
-			'value' => $instance['link_title'],
-			'check_value' => 'yes'
-		);	
-
-		$readmore = array(
-			'name' => $this->get_field_name('readmore'),
-			'label' => 'Read More Text: ',
-			'placeholder' => 'Read More Text',
-			'id' => $this->get_field_id('readmore'),
-			'value' => $instance['readmore'],
-			'class' => 'widefat'
-		);		
-
-		$thumb = array(
-			'name' => $this->get_field_name('thumb'),
-			'id' => $this->get_field_id('thumb'),
-			'type' => 'upload',
-			'value' => $instance['thumb'],
-			'auto_initiate' => false
-		);
-		
-		$size = array(
-			'name' => $this->get_field_name('size'),
-			'id' => $this->get_field_id('size'),
-			'type' => 'image_size_select',
-			'value' => $instance['size']
-		);
-
-		$maxwidth = array(
-			'name' => $this->get_field_name('maxwidth'),
-			'label' => 'Max Width: ',
-			'placeholder' => 'Max Width',
-			'id' => $this->get_field_id('maxwidth'),
-			'value' => $instance['maxwidth'],
-			'class' => 'widefat'
-		);
-				
-		$imagegroup = array(
-			'label' => 'Select Image: ',
-			'fields' => array($thumb, $size, $maxwidth),
-			'type' => 'group'
-		);
-
-		$fields = array($title, $subhead, $post_type, $number, $link, $customlink, $link_title, $readmore, $imagegroup);
+		$fields = array($title, $subhead, $number);
 		$formargs = array('fields' => $fields, 'submit_button' => '', 'before_field' => '<p>', 'after_field' => '</p>');						
 		
 		$form = new WP_Geek_Form($formargs);
@@ -234,9 +143,9 @@ class wp_Geek_Widget_Recent_Posts extends WP_Widget {
     }
 }
 
-function register_wp_Geek_Recent_Post_widget() {
-    register_widget('wp_Geek_Widget_Recent_Posts');
+function register_po_Appearances_widget() {
+    register_widget('po_Appearances_Widget');
 }
-add_action('widgets_init', 'register_wp_Geek_Recent_Post_widget');
+add_action('widgets_init', 'register_po_Appearances_widget');
 
 ?>

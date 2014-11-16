@@ -59,10 +59,8 @@
 
 			public function setdata(){
 				global $post;
-				error_log('setdata: ' . $post->ID);
 				$data = get_metadata('post', $post->ID);
 				foreach ($data as $key => $value) {
-					error_log('value ' . $value[0]);
 					$this->$key = $value[0];
 				}//foreach
 			}//setdata
@@ -92,7 +90,7 @@
 
 			public function add_boxes(){
 				foreach ($this->boxes as $box) {
-					add_meta_box( $box->id, $box->title, array($box, 'box'), $box->post_type, $box->context, $box->priority, $box->params );
+					add_meta_box( $box->id, $box->title, array($box, 'box'), $box->posttype, $box->context, $box->priority, $box->params );
 				}
 			}//add_boxes
 
@@ -147,7 +145,6 @@ class wpgSettingsMeta extends WP_Geek_metabox
 
 	public function __construct(){
 		parent::__construct($this->args);
-		$this->setdata();
 	}//__construct
 
 	public function box_content(){
@@ -165,6 +162,7 @@ class wpgSettingsMeta extends WP_Geek_metabox
 		foreach ($wp_registered_sidebars as $sidebar){
 			$widget_area_list[$sidebar['id']] = $sidebar['name'];
 		}//foreach
+		$widget_area_list['none'] = 'None';
 		return $widget_area_list;
 	}//widget_area_list
 
@@ -199,4 +197,3 @@ function fp_widget_area_selector($selected=''){
 }//fp_widget_area_selector
 	*/
 ?>
-

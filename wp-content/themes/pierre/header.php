@@ -37,11 +37,12 @@
 	</section>
 
 	<section id="header_widgets" class="row">
-		<div class="col-sm-4">Progress Bar</div>
-		<div class="col-sm-4">Appearances</div>
+		<div class="col-sm-4"><?php dynamic_sidebar('header-left'); ?></div>
+		<div class="col-sm-4"><?php dynamic_sidebar('header-center'); ?></div>
 		<div class="col-sm-4">Subscribe</div>
 	</section>
 
 </header>
 
 <section id="page" class="container">
+<div class="row">

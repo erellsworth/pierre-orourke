@@ -7,29 +7,14 @@
  * @since Pierre O'Rourke 1.0
  */
 
-get_header(); ?>
+get_header();
+global $wp_query;
+ ?>
 
-	<div id="primary" class="content-area">
-		<div id="content" class="site-content" role="main">
-			<?php
-				// Start the Loop.
-				while ( have_posts() ) : the_post();
-
-					/*
-					 * Include the post format-specific template for the content. If you want to
-					 * use this in a child theme, then include a file called called content-___.php
-					 * (where ___ is the post format) and that will be used instead.
-					 */
-the_content();
-					// If comments are open or we have at least one comment, load up the comment template.
-					if ( comments_open() || get_comments_number() ) {
-						comments_template();
-					}
-				endwhile;
-			?>
-		</div><!-- #content -->
-	</div><!-- #primary -->
-
+	<main id="main" class="col-sm-8">
+		<?php PO_Theme::loop($wp_query, array('showdate' => false)); ?>
+	</main>
+	
 <?php
 get_sidebar();
 get_footer();
