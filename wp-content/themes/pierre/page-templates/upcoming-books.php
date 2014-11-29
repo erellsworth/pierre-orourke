@@ -24,7 +24,7 @@ $query = new WP_Query( $args );
  ?>
 
 <main id="main" class="col-sm-8">
-	<?php PO_Theme::loop($query, array( 'content' => 'excerpt')); ?>
+	<?php PO_Theme::loop($query, array( 'content' => 'excerpt', 'showdate' => false)); ?>
 </main>
 
 <?php
