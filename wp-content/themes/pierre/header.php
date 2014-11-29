@@ -39,7 +39,7 @@
 	<section id="header_widgets" class="row">
 		<div class="col-sm-4"><?php dynamic_sidebar('header-left'); ?></div>
 		<div class="col-sm-4"><?php dynamic_sidebar('header-center'); ?></div>
-		<div class="col-sm-4">Subscribe</div>
+		<div class="col-sm-4"><?php dynamic_sidebar('header-right'); ?></div>
 	</section>
 
 </header>

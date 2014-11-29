@@ -100,6 +100,14 @@ class PO_Theme
 						'after_widget'  => '</aside>',
 						'before_title'  => '<h3 class="widget-title">',
 						'after_title'   => '</h3>'
+					),
+					array(
+						'name'          => 'Header Right',
+						'id'            => 'header-right',
+						'before_widget' => '<aside itemscope id="%1$s" class="widget %2$s">',
+						'after_widget'  => '</aside>',
+						'before_title'  => '<h3 class="widget-title">',
+						'after_title'   => '</h3>'
 					)
 				);
 

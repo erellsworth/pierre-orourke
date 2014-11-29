@@ -212,6 +212,42 @@ section.post:after{
 	text-shadow:none;
 }
 
+input{
+	background: rgba(0,0,0,0.3);
+	border: none;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	width: 100%;
+	padding: 5px;
+	margin: 5px auto;
+}
+
+::-webkit-input-placeholder {
+	color: #fff;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+	color: #fff;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #fff;  
+}
+
+:-ms-input-placeholder {  
+   color: #fff;  
+}
+
+button,
+input[type="submit"]{
+	background: #ACA600;
+	border: 1px solid #5F1C00;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
 @media (min-width: 1400px){
 	.container{
 		width:1366px;
