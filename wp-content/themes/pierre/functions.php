@@ -307,6 +307,7 @@ function query_filters($query){
 
 	if(is_post_type_archive( 'endorsements' )) {
 		$query->set( 'posts_per_page', '-1' );
+		$query->set('type', 'writing');
 	}
 
 	if(is_post_type_archive( 'books' )) {
