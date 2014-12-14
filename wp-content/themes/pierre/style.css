@@ -192,8 +192,35 @@ section.post:after{
 	font-weight: 700;	
 	display: inline-block;
 	margin: 0 25px 0 0;
+	position: relative;
+	padding: 0 0 10px 0;
 }
 
+
+.menu-item-has-children:after{
+	content: "\f139";
+	font-family: 'dashicons';
+	color: #ACA600;
+}
+
+
+.menu-item-has-children:hover:after{
+	content: "\f140";
+}
+
+.sub-menu{
+	display: none;
+	position: absolute;
+	left: 0;
+	width:150%;
+	background: #4B1518;
+	padding:10px;
+	z-index: 999;
+}
+
+.menu li:hover .sub-menu{
+	display: block;
+}
 
 #site_footer{
 	text-align: center;
