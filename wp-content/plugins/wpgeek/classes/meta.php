@@ -54,6 +54,7 @@
 				$this->setdata();
 				$field['name'] = $this->key . '[' . $name . ']';
 				$field['value'] = $this->$name;
+				error_log(print_r($field, true));
 				$this->form->add_field($field);
 			}
 
