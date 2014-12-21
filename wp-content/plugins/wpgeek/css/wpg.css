@@ -31,3 +31,7 @@
 	max-width: 100%;
 	height: auto;
 }
+
+.wpg_gallery hr{
+	clear: both;
+}

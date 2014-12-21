@@ -73,15 +73,20 @@ if(!class_exists('wpg_Gallery')){
 			wp_enqueue_style('wpg_colorgox_styles');
 			$meta = new WP_Geek_metabox();
             $meta->setdata();	
-            $gallery = '<div class="wpg_gallery row">';	
+            $gallery = '<div class="wpg_gallery">';	
             $grid = 4;
+            $count = 1;
             foreach (unserialize($meta->gallery_images) as $value){
+            	//if($count == 0){ $gallery .= '<div class="row ' . $count . ' ' . $count % 3 . '">'; }
+            	
 				$thumb = wp_get_attachment_image( $value, 'medium');  
 				$full = wp_get_attachment_image_src( $value, 'full');            	
             	$gallery .= '<div class="col-md-' . $grid . '"><a href="' . $full[0] . '" class="wpg_lightbox">';
             	$gallery .= $thumb;
             	$gallery .= '</a></div>';
-            }	
+            	if($count % 3 === 0){ $gallery .= '<hr/>';}
+            	$count++;
+            }	//foreach
             $gallery .= '</div>';
 			if($echo){ echo $gallery; }
 			return $gallery;
