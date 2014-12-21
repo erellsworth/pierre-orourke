@@ -129,6 +129,9 @@ class PO_Theme
 	}
 
 	public static function thumbnail($id=false, $align="left", $link=false, $linktarget='_self'){
+		if('wpg_gallery' == get_post_type()){
+			return;
+		}
 		global $post;
 		if(!$id){ $id = $post->ID; } ?>
 		<div class="post-thumb align<?php echo $align; ?>">
