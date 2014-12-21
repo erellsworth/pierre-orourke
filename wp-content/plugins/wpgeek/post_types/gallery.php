@@ -80,7 +80,7 @@ if(!class_exists('wpg_Gallery')){
             	//if($count == 0){ $gallery .= '<div class="row ' . $count . ' ' . $count % 3 . '">'; }
             	
 				$thumb = wp_get_attachment_image( $value, 'medium');  
-				$full = wp_get_attachment_image_src( $value, 'full');            	
+				$full = wp_get_attachment_image_src( $value, 'large');            	
             	$gallery .= '<div class="col-md-' . $grid . '"><a href="' . $full[0] . '" class="wpg_lightbox">';
             	$gallery .= $thumb;
             	$gallery .= '</a></div>';
