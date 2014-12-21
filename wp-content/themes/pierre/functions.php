@@ -50,7 +50,9 @@ class PO_Theme
 		wp_register_style('bootstap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css');
 		wp_register_style('gfonts', $this->font_url());
 		wp_register_style( 'pierre-style',get_stylesheet_uri(), array('bootstap', 'gfonts') );		
-		wp_enqueue_style( 'pierre-style' );	
+		wp_enqueue_style( 'pierre-style' );
+		wp_enqueue_style('dashicons');
+	
 	}
 
 	public function register_menus(){
