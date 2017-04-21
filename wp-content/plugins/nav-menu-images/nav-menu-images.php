@@ -15,8 +15,8 @@
  * Description: Display image as a menu content.
  * Author:      Milan Dinić
  * Author URI:  http://blog.milandinic.com/
- * Version:     3.2
- * Text Domain: nmi
+ * Version:     3.4
+ * Text Domain: nav-menu-images
  * Domain Path: /languages/
  * License:     GPL
  */
@@ -100,8 +100,8 @@ class Nav_Menu_Images {
 		}
 
 		// Register plugins action links filter
-		add_filter( 'plugin_action_links_' .               $this->plugin_basename, array( $this, 'action_links' ) );
-		add_filter( 'network_admin_plugin_action_links_' . $this->plugin_basename, array( $this, 'action_links' ) );
+		add_filter( 'plugin_action_links',               array( $this, 'action_links' ), 10, 2 );
+		add_filter( 'network_admin_plugin_action_links', array( $this, 'action_links' ), 10, 2 );
 
 		do_action( 'nmi_init' );
 	}
@@ -114,12 +114,11 @@ class Nav_Menu_Images {
 	 *
 	 * @uses is_textdomain_loaded() To check if translation is loaded.
 	 * @uses load_plugin_textdomain() To load translation file.
-	 * @uses plugin_basename() To get plugin's file name.
 	 */
 	public function load_textdomain() {
 		/* If translation isn't loaded, load it */
-		if ( ! is_textdomain_loaded( 'nmi' ) )
-			load_plugin_textdomain( 'nmi', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+		if ( ! is_textdomain_loaded( 'nav-menu-images' ) )
+			load_plugin_textdomain( 'nav-menu-images', false, dirname( $this->plugin_basename ) . '/languages' );
 	}
 
 	/**
@@ -249,6 +248,28 @@ class Nav_Menu_Images {
 	}
 
 	/**
+	 * Remove 'srcset' and 'sizes' attributes.
+	 *
+	 * @since 3.4
+	 * @access public
+	 *
+	 * @param array $attr Image's attributes.
+	 * @param object $attachment Image's post object data.
+	 * @return array $attr New image's attributes.
+	 */
+	public function remove_responsive( $attr, $attachment ) {
+		if ( isset( $attr['srcset'] ) ) {
+			unset( $attr['srcset'] );
+		}
+
+		if ( isset( $attr['sizes'] ) ) {
+			unset( $attr['sizes'] );
+		}
+
+		return $attr;
+	}
+
+	/**
 	 * Register menu item content filter.
 	 *
 	 * Also check if menu item is of
@@ -271,6 +292,7 @@ class Nav_Menu_Images {
 			add_filter( 'the_title',                          array( $this, 'menu_item_content' ), 15, 2 );
 			add_filter( 'wp_get_attachment_image_attributes', array( $this, 'menu_item_hover'   ), 15, 2 );
 			add_filter( 'wp_get_attachment_image_attributes', array( $this, 'menu_item_active'  ), 15, 2 );
+			add_filter( 'wp_get_attachment_image_attributes', array( $this, 'remove_responsive' ), 15, 2 );
 
 			// Mark current item status
 			if ( in_array( 'current-menu-item', $item_classes ) )
@@ -301,6 +323,7 @@ class Nav_Menu_Images {
 		remove_filter( 'the_title',                          array( $this, 'menu_item_content' ), 15, 2 );
 		remove_filter( 'wp_get_attachment_image_attributes', array( $this, 'menu_item_hover'   ), 15, 2 );
 		remove_filter( 'wp_get_attachment_image_attributes', array( $this, 'menu_item_active'  ), 15, 2 );
+		remove_filter( 'wp_get_attachment_image_attributes', array( $this, 'remove_responsive' ), 15, 2 );
 
 		return $item_output;
 	}
@@ -309,18 +332,27 @@ class Nav_Menu_Images {
 	 * Add action links to plugins page.
 	 *
 	 * @since 1.0
+	 * @since 3.3 Added second parameter.
 	 * @access public
 	 *
 	 * @uses Nav_Menu_Images::load_textdomain() To load translations.
 	 *
-	 * @param array $link Plugin's action links.
-	 * @return array $link Plugin's action links.
+	 * @param array  $links       Existing plugin's action links.
+	 * @param string $plugin_file Path to the plugin file.
+	 * @return array $links New plugin's action links.
 	 */
-	public function action_links( $links ) {
+	public function action_links( $links, $plugin_file ) {
+		// Check if it is for this plugin
+		if ( $this->plugin_basename != $plugin_file ) {
+			return $links;
+		}
+
 		// Load translations
 		$this->load_textdomain();
 
-		$links['donate'] = '<a href="http://blog.milandinic.com/donate/">' . __( 'Donate', 'nmi' ) . '</a>';
+		$links['donate'] = '<a href="http://blog.milandinic.com/donate/">' . __( 'Donate', 'nav-menu-images' ) . '</a>';
+		$links['wpdev']  = '<a href="http://blog.milandinic.com/wordpress/custom-development/">' . __( 'WordPress Developer', 'nav-menu-images' ) . '</a>';
+
 		return $links;
 	}
 }
