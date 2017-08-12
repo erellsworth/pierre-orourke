@@ -46,7 +46,6 @@ function books() {
 		'description'           => __( 'Books', 'puddles' ),
 		'labels'                => $labels,
 		'supports'              => array( 'title', 'editor', 'excerpt', 'thumbnail', ),
-		'taxonomies'            => array( 'category' ),
 		'hierarchical'          => false,
 		'public'                => true,
 		'show_ui'               => true,
@@ -66,6 +65,48 @@ function books() {
 }
 
 add_action( 'init',  __NAMESPACE__ . '\\books', 0 );
+
+// Register Custom Taxonomy
+function book_genres() {
+
+	$labels = array(
+		'name'                       => _x( 'Genres', 'Taxonomy General Name', 'pierre_orourke' ),
+		'singular_name'              => _x( 'Genre', 'Taxonomy Singular Name', 'pierre_orourke' ),
+		'menu_name'                  => __( 'Genre', 'pierre_orourke' ),
+		'all_items'                  => __( 'All Genres', 'pierre_orourke' ),
+		'parent_item'                => __( 'Parent Genre', 'pierre_orourke' ),
+		'parent_item_colon'          => __( 'Parent Genre:', 'pierre_orourke' ),
+		'new_item_name'              => __( 'New Genre', 'pierre_orourke' ),
+		'add_new_item'               => __( 'Add New Genre', 'pierre_orourke' ),
+		'edit_item'                  => __( 'Edit Genre', 'pierre_orourke' ),
+		'update_item'                => __( 'Update Genre', 'pierre_orourke' ),
+		'separate_items_with_commas' => __( 'Separate genres with commas', 'pierre_orourke' ),
+		'search_items'               => __( 'Search Genres', 'pierre_orourke' ),
+		'add_or_remove_items'        => __( 'Add or remove Genres', 'pierre_orourke' ),
+		'choose_from_most_used'      => __( 'Choose from the most used genres', 'pierre_orourke' ),
+		'not_found'                  => __( 'Not Found', 'pierre_orourke' ),
+	);
+	$rewrite = array(
+		'slug'                       => 'genres',
+		'with_front'                 => true,
+		'hierarchical'               => false,
+	);
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => false,
+		'public'                     => true,
+		'show_ui'                    => true,
+		'show_admin_column'          => true,
+		'show_in_nav_menus'          => true,
+		'show_tagcloud'              => true,
+		'rewrite'                    => $rewrite,
+	);
+	register_taxonomy( 'genre', array( 'books' ), $args );
+
+}
+
+// Hook into the 'init' action
+add_action( 'init', __NAMESPACE__ . '\\book_genres', 0 );
 
 // Register Endorsement Post Type
 function endorsements() {
