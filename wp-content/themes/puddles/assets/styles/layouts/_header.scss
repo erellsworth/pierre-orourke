@@ -1,0 +1,12 @@
+.nav-primary{
+	padding:0 0 1em 0;
+	.nav-link{
+		color:$color-primary-1;
+	}
+	.nav-pills .nav-item.show .nav-link,
+	.nav-pills .nav-link.active{
+		background: $color-secondary-1-1;
+		color: $dark;
+	}
+}
+
