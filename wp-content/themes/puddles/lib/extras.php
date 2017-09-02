@@ -31,3 +31,10 @@ function excerpt_more() {
   return ' &hellip; <a href="' . get_permalink() . '">' . __('Continued', 'sage') . '</a>';
 }
 add_filter('excerpt_more', __NAMESPACE__ . '\\excerpt_more');
+
+
+function content_wrapper( $content ){
+  return '<div class="post-content">'.$content.'</div>';
+}
+
+add_action('the_content', __NAMESPACE__ . '\\content_wrapper');
