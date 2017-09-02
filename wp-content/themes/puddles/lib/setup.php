@@ -47,6 +47,8 @@ function setup() {
   // Use main stylesheet for visual editor
   // To add custom styles edit /assets/styles/layouts/_tinymce.scss
   add_editor_style(Assets\asset_path('styles/main.css'));
+
+  add_image_size( 'homepage-thumb', 400, 225, true ); // (cropped)
 }
 add_action('after_setup_theme', __NAMESPACE__ . '\\setup');
 
