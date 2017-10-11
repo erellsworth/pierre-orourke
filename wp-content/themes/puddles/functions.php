@@ -17,6 +17,7 @@ $sage_includes = [
   'lib/wrapper.php',   // Theme wrapper class
   'lib/customizer.php', // Theme customizer
   'lib/post-types.php', // Custom Post Types  
+  'lib/meta.php', // Custom Meta Boxes  
   'lib/wp-bootstrap-navwalker.php'
 ];
 

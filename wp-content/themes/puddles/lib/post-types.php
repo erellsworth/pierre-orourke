@@ -151,7 +151,7 @@ function endorsements() {
 		'description'           => __( 'Endorsements', 'puddles' ),
 		'labels'                => $labels,
 		'supports'              => array( 'title', 'editor', 'excerpt', 'thumbnail', ),
-		'taxonomies'            => array( 'category' ),
+		'taxonomies'            => array(),
 		'hierarchical'          => false,
 		'public'                => true,
 		'show_ui'               => true,
@@ -171,3 +171,4 @@ function endorsements() {
 }
 
 add_action( 'init',  __NAMESPACE__ . '\\endorsements', 0 );
+

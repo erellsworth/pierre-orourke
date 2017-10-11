@@ -1,6 +1,8 @@
+<?php 
+use Roots\Sage\Assets;
+?>
 <header class="banner">
   <div class="container">
-    <a class="brand" href="<?= esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a>
     <nav class="nav-primary" role="navigation">
       <?php
       if (has_nav_menu('primary_navigation')) :
@@ -11,5 +13,8 @@
       endif;
       ?>
     </nav>
+    <a class="brand" href="<?= esc_url(home_url('/')); ?>">
+      <img src="<?= Assets\asset_path('images/logo.svg'); ?>" />
+    </a>    
   </div>
 </header>
