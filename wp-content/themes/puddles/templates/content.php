@@ -1,10 +1,12 @@
 <article <?php post_class('col'); ?>>
-  <header>
-    <h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-    <?php get_template_part('templates/entry-meta'); ?>
-  </header>
-  <hr/>
-  <div class="entry-summary">
-    <?php the_excerpt(); ?>
-  </div>
+	<div class="row">
+		<header class="col">
+		  <?php get_template_part('templates/entry-meta'); ?>
+		</header>
+		<div class="col-7 entry-summary">
+			<h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+		  <?php the_excerpt(); ?>
+		</div>
+	</div>
+		<hr/>
 </article>

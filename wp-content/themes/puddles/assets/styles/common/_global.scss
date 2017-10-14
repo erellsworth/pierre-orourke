@@ -5,6 +5,23 @@ body{
 	font-family: 'Libre Baskerville', serif;
 }
 
+img{
+	max-width:100%;
+}
+
+article {
+	time{
+		padding:1em;
+		display:block;
+		text-align:right;
+		font-weight:bold;
+	}
+}
+
+#main_container{
+	padding:1em;
+}
+
 .content{
 	background:$color-primary-1;
 }
@@ -12,4 +29,8 @@ body{
 .post-content{
 	max-width:40em;
 	margin:1em auto;
+}
+
+.entry-title{
+	text-align:center;
 }
