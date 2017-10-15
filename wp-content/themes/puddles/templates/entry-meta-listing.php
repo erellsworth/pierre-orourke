@@ -1,5 +1,5 @@
 <?php if ( has_post_thumbnail() ) { 
-	$img = get_the_post_thumbnail_url(get_the_ID(), 'large');
+	$img = get_the_post_thumbnail_url(get_the_ID(), 'custom_thumb');
 	?>
 	<div class="text-center">
 		<a href="<?php the_permalink(); ?>">

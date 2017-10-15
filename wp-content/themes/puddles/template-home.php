@@ -17,9 +17,9 @@ $args = array('post_status' => 'publish', 'posts_per_page' => 4);
 $the_query = new WP_Query($args);
 $count = 1;
 while ( $the_query->have_posts()) :  $the_query->the_post(); ?>
-	<?php get_template_part('templates/content', get_post_type() != 'post' ? get_post_type() : get_post_format()); ?>
+	<?php get_template_part('templates/content', 'home'); ?>
 <?php 
-	if($count % 2 == 0){ echo '<div class="w-100"></div>'; }
+	//if($count % 2 == 0){ echo '<div class="w-100"></div>'; }
 	$count++;
 	endwhile;
  	wp_reset_postdata(); 
