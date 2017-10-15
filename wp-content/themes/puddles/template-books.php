@@ -5,10 +5,9 @@
 ?>
 
 <?php while (have_posts()) : the_post(); ?>
+	<h3><?php the_title(); ?></h3>
   <?php get_template_part('templates/content', 'page'); ?>
 <?php endwhile; ?>
-
-<h3>Latest</h3>
 <hr/>
 <div class="row">
 <?php 
