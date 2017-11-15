@@ -49,6 +49,7 @@ function setup() {
   add_editor_style(Assets\asset_path('styles/main.css'));
 
   add_image_size( 'custom_thumb', 400, 225, true ); // (cropped)
+  add_image_size( 'book_cover_small', 250, 375, false ); // (not cropped)
 }
 add_action('after_setup_theme', __NAMESPACE__ . '\\setup');
 
