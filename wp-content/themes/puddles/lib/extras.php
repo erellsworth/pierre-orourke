@@ -38,3 +38,14 @@ function content_wrapper( $content ){
 }
 
 add_action('the_content', __NAMESPACE__ . '\\content_wrapper');
+
+function archive_title($title){
+  if(is_post_type_archive()){
+    return post_type_archive_title();  
+  }
+  if(is_category()){
+    return single_cat_title();
+  }
+  return $title;
+}
+add_filter('get_the_archive_title', __NAMESPACE__ . '\\archive_title');
