@@ -49,3 +49,24 @@ function archive_title($title){
   return $title;
 }
 add_filter('get_the_archive_title', __NAMESPACE__ . '\\archive_title');
+
+
+function sendinblue_opt_in( $posted_data ) { 
+  if($posted_data['email-opt-in'][0] && $posted_data['list_id']){
+    $mailin = new \Mailin('https://api.sendinblue.com/v2.0',SEND_IN_BLUE_KEY); 
+
+    $data = array(
+      "email" => $posted_data['your-email'],
+      'listid' => array($posted_data['list_id'])
+      );
+
+    if($posted_data['your-name']){
+        $data['attributes'] = array('NAME' => $posted_data['your-name']);
+    }
+    $mailin->create_update_user($data);        
+  }
+  return $posted_data; 
+}; 
+         
+// add the filter 
+add_filter( 'wpcf7_posted_data', __NAMESPACE__ . '\\sendinblue_opt_in', 10, 1 );
